@@ -1,96 +1,49 @@
-import { motion } from "framer-motion";
+import { useMemo } from "react";
 
 const GradientBlobs = () => {
+  // Generate random stars
+  const stars = useMemo(() => {
+    return Array.from({ length: 100 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 2 + 0.5,
+      delay: Math.random() * 5,
+      duration: Math.random() * 3 + 2,
+    }));
+  }, []);
+
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Primary teal blob */}
-      <motion.div
-        className="absolute w-[600px] h-[600px] rounded-full opacity-30 blur-3xl animate-blob-1"
-        style={{
-          background: "radial-gradient(circle, hsl(168 100% 42% / 0.6) 0%, transparent 70%)",
-          top: "10%",
-          left: "10%",
-        }}
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.4, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
+      {/* Star field */}
+      {stars.map((star) => (
+        <div
+          key={star.id}
+          className="absolute rounded-full bg-foreground/40 star"
+          style={{
+            left: `${star.x}%`,
+            top: `${star.y}%`,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+            animationDelay: `${star.delay}s`,
+            animationDuration: `${star.duration}s`,
+          }}
+        />
+      ))}
 
-      {/* Purple accent blob */}
-      <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full opacity-25 blur-3xl animate-blob-2"
-        style={{
-          background: "radial-gradient(circle, hsl(280 100% 60% / 0.5) 0%, transparent 70%)",
-          top: "40%",
-          right: "5%",
-        }}
-        animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.25, 0.35, 0.25],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-      />
-
-      {/* Blue blob */}
-      <motion.div
-        className="absolute w-[450px] h-[450px] rounded-full opacity-20 blur-3xl animate-blob-3"
-        style={{
-          background: "radial-gradient(circle, hsl(200 100% 50% / 0.5) 0%, transparent 70%)",
-          bottom: "10%",
-          left: "30%",
-        }}
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.2, 0.3, 0.2],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 4,
-        }}
-      />
-
-      {/* Small accent blob */}
-      <motion.div
-        className="absolute w-[300px] h-[300px] rounded-full opacity-20 blur-2xl"
-        style={{
-          background: "radial-gradient(circle, hsl(168 100% 42% / 0.4) 0%, transparent 70%)",
-          top: "60%",
-          left: "5%",
-        }}
-        animate={{
-          x: [0, 50, -30, 0],
-          y: [0, -40, 30, 0],
-          scale: [1, 1.2, 0.9, 1],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      {/* Grid overlay for depth */}
+      {/* Subtle gradient overlay at bottom */}
       <div 
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute bottom-0 left-0 right-0 h-96 opacity-30"
         style={{
-          backgroundImage: `
-            linear-gradient(hsl(168 100% 42% / 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(168 100% 42% / 0.3) 1px, transparent 1px)
-          `,
-          backgroundSize: "100px 100px",
+          background: "radial-gradient(ellipse at 50% 100%, hsl(68 100% 56% / 0.15) 0%, transparent 70%)",
+        }}
+      />
+
+      {/* Very subtle noise texture */}
+      <div 
+        className="absolute inset-0 opacity-[0.015]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         }}
       />
     </div>

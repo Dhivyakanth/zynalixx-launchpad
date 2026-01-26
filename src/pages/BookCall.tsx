@@ -146,7 +146,7 @@ const BookCall = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="card-glass text-center py-16"
+              className="p-16 rounded-3xl bg-card/30 border border-border/30 text-center"
             >
               <motion.div
                 initial={{ scale: 0 }}
@@ -163,8 +163,8 @@ const BookCall = () => {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link to="/">
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     className="btn-secondary"
                   >
                     Back to Home
@@ -172,8 +172,8 @@ const BookCall = () => {
                 </Link>
                 <Link to="/projects">
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     className="btn-primary"
                   >
                     Explore Our Work
@@ -185,10 +185,10 @@ const BookCall = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="card-glass"
+              className="p-8 md:p-10 rounded-3xl bg-card/30 border border-border/30"
             >
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                   {/* Personal Information */}
                   <div>
                     <h3 className="text-lg font-display font-semibold mb-4 flex items-center gap-2">
@@ -205,7 +205,7 @@ const BookCall = () => {
                             <FormControl>
                               <Input
                                 placeholder="John Doe"
-                                className="bg-secondary/50 border-border focus:border-primary"
+                                className="bg-muted/30 border-border focus:border-primary"
                                 {...field}
                               />
                             </FormControl>
@@ -223,7 +223,7 @@ const BookCall = () => {
                             <FormControl>
                               <Input
                                 placeholder="Your Company (Optional)"
-                                className="bg-secondary/50 border-border focus:border-primary"
+                                className="bg-muted/30 border-border focus:border-primary"
                                 {...field}
                               />
                             </FormControl>
@@ -242,7 +242,7 @@ const BookCall = () => {
                               <Input
                                 type="email"
                                 placeholder="john@example.com"
-                                className="bg-secondary/50 border-border focus:border-primary"
+                                className="bg-muted/30 border-border focus:border-primary"
                                 {...field}
                               />
                             </FormControl>
@@ -261,7 +261,7 @@ const BookCall = () => {
                               <Input
                                 type="tel"
                                 placeholder="+91 9876543210"
-                                className="bg-secondary/50 border-border focus:border-primary"
+                                className="bg-muted/30 border-border focus:border-primary"
                                 {...field}
                               />
                             </FormControl>
@@ -273,7 +273,7 @@ const BookCall = () => {
                   </div>
 
                   {/* Project Details */}
-                  <div className="pt-4 border-t border-border">
+                  <div className="pt-4 border-t border-border/50">
                     <h3 className="text-lg font-display font-semibold mb-4 flex items-center gap-2">
                       <FileText className="w-5 h-5 text-primary" />
                       Project Details
@@ -287,11 +287,11 @@ const BookCall = () => {
                             <FormLabel>Project Type *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
-                                <SelectTrigger className="bg-secondary/50 border-border">
+                                <SelectTrigger className="bg-muted/30 border-border">
                                   <SelectValue placeholder="Select type" />
                                 </SelectTrigger>
                               </FormControl>
-                              <SelectContent>
+                              <SelectContent className="bg-card border-border">
                                 {projectTypes.map((type) => (
                                   <SelectItem key={type} value={type}>
                                     {type}
@@ -312,11 +312,11 @@ const BookCall = () => {
                             <FormLabel>Budget Range *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
-                                <SelectTrigger className="bg-secondary/50 border-border">
+                                <SelectTrigger className="bg-muted/30 border-border">
                                   <SelectValue placeholder="Select budget" />
                                 </SelectTrigger>
                               </FormControl>
-                              <SelectContent>
+                              <SelectContent className="bg-card border-border">
                                 {budgetRanges.map((budget) => (
                                   <SelectItem key={budget} value={budget}>
                                     {budget}
@@ -337,11 +337,11 @@ const BookCall = () => {
                             <FormLabel>Timeline *</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
-                                <SelectTrigger className="bg-secondary/50 border-border">
+                                <SelectTrigger className="bg-muted/30 border-border">
                                   <SelectValue placeholder="Select timeline" />
                                 </SelectTrigger>
                               </FormControl>
-                              <SelectContent>
+                              <SelectContent className="bg-card border-border">
                                 {timelines.map((timeline) => (
                                   <SelectItem key={timeline} value={timeline}>
                                     {timeline}
@@ -366,7 +366,7 @@ const BookCall = () => {
                               <Textarea
                                 placeholder="Tell us about your project... What problem are you trying to solve? What features do you need? Any specific requirements or inspirations?"
                                 rows={6}
-                                className="bg-secondary/50 border-border focus:border-primary resize-none"
+                                className="bg-muted/30 border-border focus:border-primary resize-none"
                                 {...field}
                               />
                             </FormControl>
