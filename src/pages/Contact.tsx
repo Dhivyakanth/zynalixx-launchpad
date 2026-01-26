@@ -66,25 +66,21 @@ const socialLinks = [
     icon: Instagram,
     label: "Instagram",
     href: "https://www.instagram.com/zynalixx",
-    color: "hover:text-pink-500",
   },
   {
     icon: Linkedin,
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/zynalixx-23aa203a4",
-    color: "hover:text-blue-500",
   },
   {
     icon: Twitter,
     label: "X (Twitter)",
     href: "#",
-    color: "hover:text-foreground",
   },
   {
     icon: Facebook,
     label: "Facebook",
     href: "#",
-    color: "hover:text-blue-600",
   },
 ];
 
@@ -129,7 +125,7 @@ const Contact = () => {
         <div className="container mx-auto">
           <SectionHeading
             badge="Get In Touch"
-            title="Contact Zynalixx"
+            title="Contact Us"
             subtitle="Have a project in mind? Let's discuss how we can help bring your vision to life"
           />
 
@@ -197,7 +193,7 @@ const Contact = () => {
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
                       whileHover={{ scale: 1.1, y: -2 }}
-                      className={`w-12 h-12 rounded-xl glass flex items-center justify-center text-muted-foreground ${social.color} transition-colors`}
+                      className="w-12 h-12 rounded-xl bg-card/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
                       aria-label={social.label}
                     >
                       <social.icon size={20} />
@@ -211,9 +207,14 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="card-glass relative overflow-hidden"
+                className="p-6 rounded-2xl bg-card/30 border border-border/30 relative overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10" />
+                <div 
+                  className="absolute inset-0 opacity-20"
+                  style={{
+                    background: "radial-gradient(circle at 50% 50%, hsl(68 100% 56% / 0.3) 0%, transparent 70%)",
+                  }}
+                />
                 <div className="relative z-10">
                   <h4 className="text-lg font-display font-semibold mb-2">Prefer a Direct Call?</h4>
                   <p className="text-muted-foreground text-sm mb-4">
@@ -238,7 +239,7 @@ const Contact = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="card-glass"
+              className="p-8 rounded-2xl bg-card/30 border border-border/30"
             >
               <h3 className="text-2xl font-display font-semibold mb-6">Send a Message</h3>
               
@@ -264,7 +265,7 @@ const Contact = () => {
                           <FormControl>
                             <Input
                               placeholder="John Doe"
-                              className="bg-secondary/50 border-border focus:border-primary"
+                              className="bg-muted/30 border-border focus:border-primary"
                               {...field}
                             />
                           </FormControl>
@@ -283,7 +284,7 @@ const Contact = () => {
                             <Input
                               type="email"
                               placeholder="john@example.com"
-                              className="bg-secondary/50 border-border focus:border-primary"
+                              className="bg-muted/30 border-border focus:border-primary"
                               {...field}
                             />
                           </FormControl>
@@ -302,7 +303,7 @@ const Contact = () => {
                             <Input
                               type="tel"
                               placeholder="+91 9876543210"
-                              className="bg-secondary/50 border-border focus:border-primary"
+                              className="bg-muted/30 border-border focus:border-primary"
                               {...field}
                             />
                           </FormControl>
@@ -321,7 +322,7 @@ const Contact = () => {
                             <Textarea
                               placeholder="Tell us about your project..."
                               rows={5}
-                              className="bg-secondary/50 border-border focus:border-primary resize-none"
+                              className="bg-muted/30 border-border focus:border-primary resize-none"
                               {...field}
                             />
                           </FormControl>

@@ -24,8 +24,9 @@ const SectionHeading = ({ title, subtitle, badge, align = "center", children }: 
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="inline-block px-4 py-1.5 mb-4 text-xs font-medium uppercase tracking-wider text-primary bg-primary/10 border border-primary/20 rounded-full"
+          className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 text-xs font-medium uppercase tracking-wider text-primary bg-primary/10 border border-primary/20 rounded-full"
         >
+          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
           {badge}
         </motion.span>
       )}

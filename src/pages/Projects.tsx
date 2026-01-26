@@ -12,7 +12,6 @@ const projects = [
     techStack: ["React", "Node.js", "MongoDB", "Express"],
     features: ["Invoice Generation", "Payment Tracking", "Tax Calculations", "Financial Reports"],
     icon: Code2,
-    gradient: "from-blue-500/20 to-cyan-500/20",
   },
   {
     title: "E-Commerce Platform",
@@ -21,7 +20,6 @@ const projects = [
     techStack: ["MERN Stack", "Stripe", "Redux", "AWS"],
     features: ["Product Management", "Shopping Cart", "Secure Payments", "Order Tracking"],
     icon: ShoppingCart,
-    gradient: "from-purple-500/20 to-pink-500/20",
   },
   {
     title: "Portfolio Website",
@@ -30,7 +28,6 @@ const projects = [
     techStack: ["React", "Framer Motion", "Tailwind CSS", "Vite"],
     features: ["Responsive Design", "Smooth Animations", "SEO Optimized", "Fast Loading"],
     icon: User,
-    gradient: "from-green-500/20 to-emerald-500/20",
   },
   {
     title: "AI Chatbot",
@@ -39,7 +36,6 @@ const projects = [
     techStack: ["Python", "TensorFlow", "NLP", "React"],
     features: ["Natural Language Processing", "24/7 Availability", "Multi-language Support", "Analytics Dashboard"],
     icon: Bot,
-    gradient: "from-orange-500/20 to-red-500/20",
   },
 ];
 
@@ -74,57 +70,59 @@ const Projects = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.15 }}
-                className="card-glass group overflow-hidden"
+                whileHover={{ borderColor: "hsl(var(--primary) / 0.5)" }}
+                className="p-8 rounded-2xl bg-card/30 border border-border/30 transition-all duration-300 group"
               >
-                {/* Header with gradient */}
-                <div className={`h-48 bg-gradient-to-br ${project.gradient} rounded-xl mb-6 flex items-center justify-center relative overflow-hidden`}>
-                  <project.icon className="w-20 h-20 text-foreground/20 group-hover:text-foreground/40 transition-colors" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
+                {/* Header with icon */}
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                    <project.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-medium text-primary uppercase tracking-wider">
+                      {project.category}
+                    </span>
+                    <h3 className="text-2xl font-display font-semibold mt-1 group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+                  </div>
                 </div>
 
                 {/* Content */}
-                <div>
-                  <span className="text-xs font-medium text-primary uppercase tracking-wider">
-                    {project.category}
-                  </span>
-                  <h3 className="text-2xl font-display font-semibold mt-2 mb-3 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm mb-5 leading-relaxed">
-                    {project.description}
-                  </p>
+                <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                  {project.description}
+                </p>
 
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {project.techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 text-xs font-medium bg-secondary/50 border border-border rounded-full text-muted-foreground"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Features */}
-                  <div className="grid grid-cols-2 gap-2 mb-6">
-                    {project.features.map((feature) => (
-                      <div key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* CTA */}
-                  <motion.button
-                    whileHover={{ x: 5 }}
-                    className="flex items-center gap-2 text-primary text-sm font-medium"
-                  >
-                    View Details
-                    <ExternalLink size={16} />
-                  </motion.button>
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 text-xs font-medium bg-muted/30 border border-border/50 rounded-full text-muted-foreground"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
+
+                {/* Features */}
+                <div className="grid grid-cols-2 gap-2 mb-6">
+                  {project.features.map((feature) => (
+                    <div key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <span className="w-1 h-1 rounded-full bg-primary" />
+                      {feature}
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <motion.button
+                  whileHover={{ x: 4 }}
+                  className="flex items-center gap-2 text-primary text-sm font-medium"
+                >
+                  View Details
+                  <ExternalLink size={14} />
+                </motion.button>
               </motion.div>
             ))}
           </div>
@@ -134,9 +132,14 @@ const Projects = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-16 card-glass text-center py-12 px-8 relative overflow-hidden"
+            className="mt-16 text-center p-12 rounded-3xl bg-card/30 border border-border/30 relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5" />
+            <div 
+              className="absolute inset-0 opacity-20"
+              style={{
+                background: "radial-gradient(circle at 50% 50%, hsl(68 100% 56% / 0.3) 0%, transparent 70%)",
+              }}
+            />
             <div className="relative z-10">
               <h2 className="text-2xl md:text-3xl font-display font-bold mb-4">
                 Want to Be Our Next Success Story?
@@ -146,8 +149,8 @@ const Projects = () => {
               </p>
               <Link to="/book-call">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   className="btn-primary inline-flex items-center gap-2"
                 >
                   Start Your Project

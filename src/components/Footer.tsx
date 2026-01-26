@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Instagram, Linkedin, Twitter, Facebook, Mail, Phone, MapPin } from "lucide-react";
+import { Instagram, Linkedin, Twitter, Facebook, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 import logo from "@/assets/zynalixx-logo.jpeg";
 
 const Footer = () => {
@@ -22,7 +22,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative z-10 border-t border-border bg-card/30 backdrop-blur-xl">
+    <footer className="relative z-10 border-t border-border/30 bg-background">
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
@@ -31,9 +31,9 @@ const Footer = () => {
               <img
                 src={logo}
                 alt="Zynalixx"
-                className="w-12 h-12 rounded-xl object-cover border border-primary/30"
+                className="w-10 h-10 rounded-lg object-cover"
               />
-              <span className="text-2xl font-display font-bold text-gradient">
+              <span className="text-xl font-display font-bold text-foreground">
                 Zynalixx
               </span>
             </Link>
@@ -49,7 +49,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-lg glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors"
+                  className="w-10 h-10 rounded-lg bg-card/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
                   aria-label={social.label}
                 >
                   <social.icon size={18} />
@@ -106,11 +106,20 @@ const Footer = () => {
                 <span>India</span>
               </li>
             </ul>
+            <Link to="/book-call" className="mt-6 inline-block">
+              <motion.span
+                whileHover={{ x: 4 }}
+                className="inline-flex items-center gap-2 text-primary text-sm font-medium"
+              >
+                Get in Touch
+                <ArrowRight size={14} />
+              </motion.span>
+            </Link>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-12 pt-8 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             © {currentYear} Zynalixx. All rights reserved.
           </p>

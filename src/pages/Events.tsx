@@ -12,7 +12,6 @@ const events = [
     description: "An intensive hands-on workshop covering modern web development with React, Node.js, and cloud deployment. Perfect for beginners and intermediate developers looking to level up.",
     highlights: ["React Fundamentals", "API Integration", "Deployment Strategies", "Live Coding Sessions"],
     attendees: "50+",
-    gradient: "from-blue-500/20 to-cyan-500/20",
   },
   {
     title: "Tech Hackathon 2024",
@@ -22,7 +21,6 @@ const events = [
     description: "A 48-hour coding marathon where teams built innovative solutions for real-world problems. Featured mentorship from industry experts and exciting prizes.",
     highlights: ["48 Hours Coding", "Industry Mentors", "Cash Prizes", "Networking"],
     attendees: "100+",
-    gradient: "from-purple-500/20 to-pink-500/20",
   },
   {
     title: "Startup Meetup",
@@ -32,7 +30,6 @@ const events = [
     description: "An exclusive networking event connecting entrepreneurs, investors, and tech enthusiasts. Great opportunity to share ideas, find co-founders, and explore partnerships.",
     highlights: ["Pitch Sessions", "Investor Connect", "Panel Discussions", "Community Building"],
     attendees: "75+",
-    gradient: "from-green-500/20 to-emerald-500/20",
   },
 ];
 
@@ -48,7 +45,7 @@ const Events = () => {
           />
 
           {/* Events Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
             {events.map((event, index) => (
               <motion.div
                 key={event.title}
@@ -56,65 +53,59 @@ const Events = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.15 }}
-                whileHover={{ y: -8 }}
-                className="card-glass group overflow-hidden"
+                whileHover={{ y: -4, borderColor: "hsl(var(--primary) / 0.5)" }}
+                className="p-8 rounded-2xl bg-card/30 border border-border/30 transition-all duration-300 group"
               >
-                {/* Header */}
-                <div className={`h-32 bg-gradient-to-br ${event.gradient} rounded-xl mb-5 flex items-center justify-center relative`}>
-                  <span className="text-4xl font-display font-bold text-foreground/20">
+                {/* Badge */}
+                <div className="flex items-center justify-between mb-6">
+                  <span className="px-3 py-1 text-xs font-medium text-primary bg-primary/10 border border-primary/20 rounded-full">
                     {event.type}
                   </span>
-                  {/* Badge */}
-                  <div className="absolute top-3 right-3 px-3 py-1 bg-card/80 backdrop-blur-sm rounded-full text-xs font-medium text-primary border border-primary/20">
-                    {event.type}
-                  </div>
                 </div>
 
                 {/* Content */}
-                <div>
-                  <h3 className="text-xl font-display font-semibold mb-3 group-hover:text-primary transition-colors">
-                    {event.title}
-                  </h3>
+                <h3 className="text-xl font-display font-semibold mb-4 group-hover:text-primary transition-colors">
+                  {event.title}
+                </h3>
 
-                  {/* Meta Info */}
-                  <div className="flex flex-wrap gap-4 mb-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1.5">
-                      <Calendar size={14} className="text-primary" />
-                      {event.date}
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <MapPin size={14} className="text-primary" />
-                      {event.location}
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Users size={14} className="text-primary" />
-                      {event.attendees} Attendees
-                    </div>
+                {/* Meta Info */}
+                <div className="flex flex-wrap gap-4 mb-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-1.5">
+                    <Calendar size={14} className="text-primary" />
+                    {event.date}
                   </div>
-
-                  <p className="text-muted-foreground text-sm mb-5 leading-relaxed">
-                    {event.description}
-                  </p>
-
-                  {/* Highlights */}
-                  <div className="space-y-2 mb-6">
-                    {event.highlights.map((highlight) => (
-                      <div key={highlight} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                        {highlight}
-                      </div>
-                    ))}
+                  <div className="flex items-center gap-1.5">
+                    <MapPin size={14} className="text-primary" />
+                    {event.location}
                   </div>
-
-                  {/* CTA */}
-                  <motion.button
-                    whileHover={{ x: 5 }}
-                    className="flex items-center gap-2 text-primary text-sm font-medium"
-                  >
-                    View Details
-                    <ArrowRight size={16} />
-                  </motion.button>
+                  <div className="flex items-center gap-1.5">
+                    <Users size={14} className="text-primary" />
+                    {event.attendees} Attendees
+                  </div>
                 </div>
+
+                <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                  {event.description}
+                </p>
+
+                {/* Highlights */}
+                <div className="space-y-2 mb-6">
+                  {event.highlights.map((highlight) => (
+                    <div key={highlight} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <span className="w-1 h-1 rounded-full bg-primary" />
+                      {highlight}
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <motion.button
+                  whileHover={{ x: 4 }}
+                  className="flex items-center gap-2 text-primary text-sm font-medium"
+                >
+                  View Details
+                  <ArrowRight size={14} />
+                </motion.button>
               </motion.div>
             ))}
           </div>
@@ -124,12 +115,17 @@ const Events = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="card-glass text-center py-12 px-8 relative overflow-hidden"
+            className="text-center p-12 rounded-3xl bg-card/30 border border-border/30 relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5" />
+            <div 
+              className="absolute inset-0 opacity-20"
+              style={{
+                background: "radial-gradient(circle at 50% 50%, hsl(68 100% 56% / 0.3) 0%, transparent 70%)",
+              }}
+            />
             <div className="relative z-10">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Clock className="w-6 h-6 text-primary" />
+                <Clock className="w-5 h-5 text-primary" />
                 <span className="text-sm font-medium text-primary uppercase tracking-wider">Coming Soon</span>
               </div>
               <h2 className="text-2xl md:text-3xl font-display font-bold mb-4">
@@ -139,12 +135,12 @@ const Events = () => {
                 Follow us on social media to get notified about our upcoming workshops, hackathons, and meetups.
               </p>
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 className="btn-secondary inline-flex items-center gap-2"
               >
                 Follow Us
-                <ArrowRight size={18} />
+                <ArrowRight size={16} />
               </motion.button>
             </div>
           </motion.div>
