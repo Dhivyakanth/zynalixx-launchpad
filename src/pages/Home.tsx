@@ -4,6 +4,8 @@ import { ArrowRight, Code2, Palette, Brain, Rocket, Smartphone, TrendingUp } fro
 import { useRef } from "react";
 import PageTransition from "@/components/PageTransition";
 import LogoMarquee from "@/components/LogoMarquee";
+import MagneticButton from "@/components/MagneticButton";
+import TextReveal from "@/components/TextReveal";
 import heroPlanet from "@/assets/hero-planet.png";
 
 const services = [
@@ -40,18 +42,19 @@ const Home = () => {
             style={{ y: planetY, scale: planetScale, opacity: planetOpacity }}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
               className="relative w-full h-full flex items-center justify-center"
             >
-              {/* Planet Image */}
+              {/* Planet Image with floating animation */}
               <motion.img
                 src={heroPlanet}
                 alt=""
                 className="w-[80vw] max-w-[1200px] h-auto object-contain opacity-90"
                 animate={{ 
-                  y: [0, -10, 0],
+                  y: [0, -15, 0],
+                  rotate: [0, 1, 0],
                 }}
                 transition={{ 
                   duration: 8, 
@@ -60,10 +63,14 @@ const Home = () => {
                 }}
               />
               {/* Glow overlay */}
-              <div 
+              <motion.div 
                 className="absolute inset-0 pointer-events-none"
+                animate={{
+                  opacity: [0.3, 0.5, 0.3],
+                }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 style={{
-                  background: "radial-gradient(circle at 60% 50%, hsl(68 100% 56% / 0.1) 0%, transparent 50%)",
+                  background: "radial-gradient(circle at 60% 50%, hsl(68 100% 56% / 0.15) 0%, transparent 50%)",
                 }}
               />
             </motion.div>
@@ -76,77 +83,60 @@ const Home = () => {
           >
             {/* Announcement Badge */}
             <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.2 }}
+              initial={{ opacity: 0, y: 20, scale: 0.9 }} 
+              animate={{ opacity: 1, y: 0, scale: 1 }} 
+              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
               className="mb-8"
             >
-              <span className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-card/60 border border-border/50 rounded-full text-muted-foreground backdrop-blur-sm">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <motion.span 
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-card/60 border border-border/50 rounded-full text-muted-foreground backdrop-blur-sm"
+                whileHover={{ scale: 1.05, borderColor: "hsl(68 100% 56% / 0.5)" }}
+              >
+                <motion.span 
+                  className="w-2 h-2 rounded-full bg-primary"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
                 Introducing AI-Powered Development Solutions
-              </span>
+              </motion.span>
             </motion.div>
 
-            {/* Main Headline with stagger animation */}
+            {/* Main Headline with text reveal */}
             <motion.h1 
-              initial={{ opacity: 0, y: 30 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.3, duration: 0.8 }}
               className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-tight mb-6"
             >
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-              >
-                Turn Your Ideas Into
-              </motion.span>
+              <TextReveal delay={0.3}>Turn Your Ideas Into</TextReveal>
               <br />
-              <motion.span 
-                className="text-primary"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-              >
-                Stunning Products
-              </motion.span>
+              <span className="text-primary">
+                <TextReveal delay={0.5} type="chars" staggerChildren={0.04}>Stunning Products</TextReveal>
+              </span>
             </motion.h1>
 
             {/* Subheadline */}
             <motion.p 
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.7 }}
+              transition={{ delay: 0.9 }}
               className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
             >
-              We build premium full-stack applications, AI solutions, and digital products that help startups and enterprises scale their business.
+              <TextReveal delay={0.7} staggerChildren={0.02}>
+                We build premium full-stack applications, AI solutions, and digital products that help startups and enterprises scale their business.
+              </TextReveal>
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons with magnetic effect */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.9 }}
+              transition={{ delay: 1.1 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
-              <Link to="/book-call">
-                <motion.button 
-                  whileHover={{ scale: 1.05, boxShadow: "0 0 30px hsl(68 100% 56% / 0.4)" }} 
-                  whileTap={{ scale: 0.98 }} 
-                  className="btn-primary flex items-center gap-2 text-base px-8 py-4"
-                >
-                  Start Your Project <ArrowRight size={18} />
-                </motion.button>
-              </Link>
-              <Link to="/projects">
-                <motion.button 
-                  whileHover={{ scale: 1.05 }} 
-                  whileTap={{ scale: 0.98 }} 
-                  className="btn-secondary flex items-center gap-2 text-base px-8 py-4"
-                >
-                  View Our Work
-                </motion.button>
-              </Link>
+              <MagneticButton to="/book-call" variant="primary" strength={0.3}>
+                Start Your Project <ArrowRight size={18} />
+              </MagneticButton>
+              <MagneticButton to="/projects" variant="secondary" strength={0.3}>
+                View Our Work
+              </MagneticButton>
             </motion.div>
 
             {/* Scroll indicator */}
@@ -159,11 +149,11 @@ const Home = () => {
               <motion.div
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                className="w-6 h-10 mx-auto rounded-full border-2 border-primary/40 flex items-start justify-center p-2"
+                className="w-6 h-10 mx-auto rounded-full border-2 border-primary/40 flex items-start justify-center p-2 magnetic-target cursor-pointer"
               >
                 <motion.div 
                   className="w-1 h-2 bg-primary rounded-full"
-                  animate={{ opacity: [0.3, 1, 0.3] }}
+                  animate={{ opacity: [0.3, 1, 0.3], y: [0, 4, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </motion.div>
@@ -194,24 +184,14 @@ const Home = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" /> 
                 What We Do
               </motion.span>
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="text-4xl md:text-5xl font-display font-bold mb-4"
-              >
-                Our Expertise
-              </motion.h2>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="text-muted-foreground text-lg max-w-2xl mx-auto"
-              >
-                From concept to deployment, we deliver end-to-end solutions that drive growth
-              </motion.p>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
+                <TextReveal>Our Expertise</TextReveal>
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                <TextReveal delay={0.2} staggerChildren={0.02}>
+                  From concept to deployment, we deliver end-to-end solutions that drive growth
+                </TextReveal>
+              </p>
             </motion.div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -227,10 +207,10 @@ const Home = () => {
                     borderColor: "hsl(var(--primary))",
                     boxShadow: "0 20px 40px -20px hsl(68 100% 56% / 0.3)"
                   }} 
-                  className="p-6 rounded-2xl bg-card/30 border border-border/30 text-center transition-all duration-300 group cursor-pointer"
+                  className="p-6 rounded-2xl bg-card/30 border border-border/30 text-center transition-all duration-300 group cursor-pointer magnetic-target"
                 >
                   <motion.div
-                    whileHover={{ rotate: [0, -10, 10, 0] }}
+                    whileHover={{ rotate: [0, -15, 15, 0], scale: 1.1 }}
                     transition={{ duration: 0.5 }}
                   >
                     <service.icon className="w-8 h-8 mx-auto mb-3 text-muted-foreground group-hover:text-primary transition-colors" />
@@ -252,11 +232,16 @@ const Home = () => {
             >
               <Link to="/services">
                 <motion.span
-                  whileHover={{ x: 5 }}
-                  className="inline-flex items-center gap-2 text-primary font-medium cursor-pointer"
+                  whileHover={{ x: 8 }}
+                  className="inline-flex items-center gap-2 text-primary font-medium cursor-pointer magnetic-target"
                 >
                   Explore All Services
-                  <ArrowRight size={16} />
+                  <motion.span
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <ArrowRight size={16} />
+                  </motion.span>
                 </motion.span>
               </Link>
             </motion.div>
@@ -266,10 +251,14 @@ const Home = () => {
         {/* Stats with counter animation effect */}
         <section className="py-20 px-4 border-y border-border/30 relative overflow-hidden">
           {/* Background glow */}
-          <div 
-            className="absolute inset-0 opacity-30 pointer-events-none"
+          <motion.div 
+            className="absolute inset-0 pointer-events-none"
+            animate={{
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             style={{
-              background: "radial-gradient(ellipse at 50% 50%, hsl(68 100% 56% / 0.1) 0%, transparent 60%)",
+              background: "radial-gradient(ellipse at 50% 50%, hsl(68 100% 56% / 0.15) 0%, transparent 60%)",
             }}
           />
           
@@ -286,13 +275,14 @@ const Home = () => {
                   initial={{ opacity: 0, y: 30, scale: 0.8 }} 
                   whileInView={{ opacity: 1, y: 0, scale: 1 }} 
                   viewport={{ once: true, margin: "-50px" }} 
-                  transition={{ delay: index * 0.15, duration: 0.6, type: "spring" }} 
-                  className="text-center"
+                  transition={{ delay: index * 0.15, duration: 0.6, type: "spring" }}
+                  whileHover={{ scale: 1.05 }}
+                  className="text-center cursor-pointer magnetic-target"
                 >
                   <motion.p 
                     className="text-4xl md:text-5xl font-display font-bold text-primary mb-2"
-                    initial={{ scale: 0.5 }}
-                    whileInView={{ scale: 1 }}
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.15 + 0.2, type: "spring", stiffness: 200 }}
                   >
@@ -330,24 +320,14 @@ const Home = () => {
               />
               
               <div className="relative z-10">
-                <motion.h2 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="text-3xl md:text-5xl font-display font-bold mb-4"
-                >
-                  Ready to Build Something Amazing?
-                </motion.h2>
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto"
-                >
-                  Let's discuss your project and create a solution that exceeds your expectations.
-                </motion.p>
+                <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
+                  <TextReveal>Ready to Build Something Amazing?</TextReveal>
+                </h2>
+                <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
+                  <TextReveal delay={0.2} staggerChildren={0.02}>
+                    Let's discuss your project and create a solution that exceeds your expectations.
+                  </TextReveal>
+                </p>
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -355,24 +335,12 @@ const Home = () => {
                   transition={{ delay: 0.4 }}
                   className="flex flex-col sm:flex-row items-center justify-center gap-4"
                 >
-                  <Link to="/book-call">
-                    <motion.button 
-                      whileHover={{ scale: 1.05, boxShadow: "0 0 40px hsl(68 100% 56% / 0.5)" }} 
-                      whileTap={{ scale: 0.98 }} 
-                      className="btn-primary flex items-center gap-2"
-                    >
-                      Schedule a Call <ArrowRight size={18} />
-                    </motion.button>
-                  </Link>
-                  <Link to="/contact">
-                    <motion.button 
-                      whileHover={{ scale: 1.05 }} 
-                      whileTap={{ scale: 0.98 }} 
-                      className="btn-secondary"
-                    >
-                      Contact Us
-                    </motion.button>
-                  </Link>
+                  <MagneticButton to="/book-call" variant="primary" strength={0.4}>
+                    Schedule a Call <ArrowRight size={18} />
+                  </MagneticButton>
+                  <MagneticButton to="/contact" variant="secondary" strength={0.4}>
+                    Contact Us
+                  </MagneticButton>
                 </motion.div>
               </div>
             </motion.div>
