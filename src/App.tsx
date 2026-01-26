@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import GradientBlobs from "./components/GradientBlobs";
+import CursorFollower from "./components/CursorFollower";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Projects from "./pages/Projects";
@@ -24,7 +25,8 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="relative min-h-screen">
+        <div className="relative min-h-screen cursor-none lg:cursor-none">
+          <CursorFollower />
           <GradientBlobs />
           <Navbar />
           <AnimatePresence mode="wait">
