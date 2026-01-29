@@ -6,7 +6,7 @@ import PageTransition from "@/components/PageTransition";
 import LogoMarquee from "@/components/LogoMarquee";
 import MagneticButton from "@/components/MagneticButton";
 import TextReveal from "@/components/TextReveal";
-import heroPlanet from "@/assets/hero-planet.png";
+import heroOrb from "@/assets/hero-orb.png";
 
 const services = [
   { icon: Palette, name: "Graphic Design" },
@@ -47,17 +47,17 @@ const Home = () => {
               transition={{ duration: 1.5, ease: "easeOut" }}
               className="relative w-full h-full flex items-center justify-center"
             >
-              {/* Planet Image with floating animation */}
+              {/* Glowing Orb with floating and pulsing animation */}
               <motion.img
-                src={heroPlanet}
+                src={heroOrb}
                 alt=""
-                className="w-[80vw] max-w-[1200px] h-auto object-contain opacity-90"
+                className="w-[70vw] max-w-[900px] h-auto object-contain"
                 animate={{ 
-                  y: [0, -15, 0],
-                  rotate: [0, 1, 0],
+                  y: [0, -20, 0],
+                  scale: [1, 1.05, 1],
                 }}
                 transition={{ 
-                  duration: 8, 
+                  duration: 6, 
                   repeat: Infinity, 
                   ease: "easeInOut" 
                 }}
