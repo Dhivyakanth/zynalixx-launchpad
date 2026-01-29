@@ -37,44 +37,29 @@ const Home = () => {
       <main className="relative z-10">
         {/* Hero Section */}
         <section ref={heroRef} className="min-h-screen flex flex-col items-center justify-center px-4 pt-20 relative overflow-hidden">
-          {/* 3D Orb Background with Parallax */}
+          {/* Seamless Orb Background with Parallax */}
           <motion.div
-            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+            className="absolute inset-0 pointer-events-none"
             style={{ y: planetY, scale: planetScale, opacity: planetOpacity }}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
-              className="relative w-full h-full flex items-center justify-center"
+              className="absolute inset-0"
             >
-              {/* Background glow for better blending */}
+              {/* Main orb as background with radial mask for seamless blending */}
               <motion.div
-                className="absolute inset-0"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vh]"
                 style={{
-                  background: "radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.15) 0%, hsl(var(--primary) / 0.05) 30%, transparent 60%)",
-                }}
-                animate={{
-                  opacity: [0.6, 1, 0.6],
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              />
-              
-              {/* Floating particles around the orb */}
-              <ParticleField count={40} className="z-10" />
-              
-              {/* Glowing Orb with floating and pulsing animation */}
-              <motion.img
-                src={heroOrb}
-                alt=""
-                className="w-[70vw] max-w-[900px] h-auto object-contain relative z-0"
-                style={{
-                  filter: "drop-shadow(0 0 60px hsl(var(--primary) / 0.4)) drop-shadow(0 0 120px hsl(var(--primary) / 0.2))",
-                  mixBlendMode: "screen",
+                  backgroundImage: `url(${heroOrb})`,
+                  backgroundSize: "70vw auto",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                  maskImage: "radial-gradient(ellipse 50% 50% at 50% 50%, black 20%, transparent 70%)",
+                  WebkitMaskImage: "radial-gradient(ellipse 50% 50% at 50% 50%, black 20%, transparent 70%)",
                 }}
                 animate={{ 
-                  y: [0, -20, 0],
                   scale: [1, 1.05, 1],
                 }}
                 transition={{ 
@@ -84,29 +69,59 @@ const Home = () => {
                 }}
               />
               
-              {/* Inner glow overlay */}
-              <motion.div 
-                className="absolute inset-0 pointer-events-none"
+              {/* Primary glow layer */}
+              <motion.div
+                className="absolute inset-0"
+                style={{
+                  background: "radial-gradient(ellipse 40% 40% at 50% 50%, hsl(var(--primary) / 0.4) 0%, hsl(var(--primary) / 0.15) 30%, transparent 60%)",
+                }}
+                animate={{
+                  opacity: [0.5, 0.8, 0.5],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              />
+              
+              {/* Secondary atmospheric glow */}
+              <motion.div
+                className="absolute inset-0"
+                style={{
+                  background: "radial-gradient(ellipse 60% 50% at 50% 45%, hsl(280 80% 55% / 0.2) 0%, transparent 50%)",
+                }}
                 animate={{
                   opacity: [0.3, 0.6, 0.3],
                 }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                style={{
-                  background: "radial-gradient(circle at 50% 40%, hsl(var(--primary) / 0.2) 0%, transparent 40%)",
-                }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
               />
               
-              {/* Outer glow ring */}
+              {/* Floating particles around the orb */}
+              <ParticleField count={40} />
+              
+              {/* Outer pulsing ring */}
               <motion.div
-                className="absolute w-[80vw] max-w-[1000px] aspect-square rounded-full pointer-events-none"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] max-w-[1000px] aspect-square rounded-full"
                 style={{
-                  background: "radial-gradient(circle, transparent 40%, hsl(var(--primary) / 0.1) 50%, transparent 60%)",
+                  background: "radial-gradient(circle, transparent 35%, hsl(var(--primary) / 0.15) 45%, hsl(var(--primary) / 0.05) 55%, transparent 65%)",
                 }}
                 animate={{
-                  scale: [1, 1.15, 1],
-                  opacity: [0.3, 0.5, 0.3],
+                  scale: [1, 1.2, 1],
+                  opacity: [0.4, 0.7, 0.4],
                 }}
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              />
+              
+              {/* Inner core glow */}
+              <motion.div
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[30vw] max-w-[400px] aspect-square rounded-full"
+                style={{
+                  background: "radial-gradient(circle, hsl(var(--primary) / 0.3) 0%, hsl(var(--primary) / 0.1) 40%, transparent 70%)",
+                  filter: "blur(40px)",
+                }}
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [0.5, 0.8, 0.5],
+                }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
             </motion.div>
           </motion.div>
