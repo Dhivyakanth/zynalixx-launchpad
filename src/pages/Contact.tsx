@@ -45,7 +45,6 @@ const contactInfo = [
     icon: Phone,
     label: "Phone",
     value: "+91 9342084099",
-    secondaryValue: "+91 9363084122",
     href: "tel:+919342084099",
   },
   {
@@ -163,14 +162,6 @@ const Contact = () => {
                           </a>
                         ) : (
                           <p className="text-foreground font-medium">{item.value}</p>
-                        )}
-                        {item.secondaryValue && (
-                          <a
-                            href={`tel:${item.secondaryValue.replace(/\s/g, "")}`}
-                            className="text-foreground hover:text-primary transition-colors font-medium block"
-                          >
-                            {item.secondaryValue}
-                          </a>
                         )}
                       </div>
                     </motion.div>
