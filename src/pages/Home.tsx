@@ -6,6 +6,7 @@ import PageTransition from "@/components/PageTransition";
 import LogoMarquee from "@/components/LogoMarquee";
 import MagneticButton from "@/components/MagneticButton";
 import TextReveal from "@/components/TextReveal";
+import ParticleField from "@/components/ParticleField";
 import heroOrb from "@/assets/hero-orb.png";
 
 const services = [
@@ -36,22 +37,42 @@ const Home = () => {
       <main className="relative z-10">
         {/* Hero Section */}
         <section ref={heroRef} className="min-h-screen flex flex-col items-center justify-center px-4 pt-20 relative overflow-hidden">
-          {/* 3D Planet Background with Parallax */}
+          {/* 3D Orb Background with Parallax */}
           <motion.div
             className="absolute inset-0 flex items-center justify-center pointer-events-none"
             style={{ y: planetY, scale: planetScale, opacity: planetOpacity }}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
               className="relative w-full h-full flex items-center justify-center"
             >
+              {/* Background glow for better blending */}
+              <motion.div
+                className="absolute inset-0"
+                style={{
+                  background: "radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.15) 0%, hsl(var(--primary) / 0.05) 30%, transparent 60%)",
+                }}
+                animate={{
+                  opacity: [0.6, 1, 0.6],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              />
+              
+              {/* Floating particles around the orb */}
+              <ParticleField count={40} className="z-10" />
+              
               {/* Glowing Orb with floating and pulsing animation */}
               <motion.img
                 src={heroOrb}
                 alt=""
-                className="w-[70vw] max-w-[900px] h-auto object-contain"
+                className="w-[70vw] max-w-[900px] h-auto object-contain relative z-0"
+                style={{
+                  filter: "drop-shadow(0 0 60px hsl(var(--primary) / 0.4)) drop-shadow(0 0 120px hsl(var(--primary) / 0.2))",
+                  mixBlendMode: "screen",
+                }}
                 animate={{ 
                   y: [0, -20, 0],
                   scale: [1, 1.05, 1],
@@ -62,16 +83,30 @@ const Home = () => {
                   ease: "easeInOut" 
                 }}
               />
-              {/* Glow overlay */}
+              
+              {/* Inner glow overlay */}
               <motion.div 
                 className="absolute inset-0 pointer-events-none"
                 animate={{
-                  opacity: [0.3, 0.5, 0.3],
+                  opacity: [0.3, 0.6, 0.3],
                 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 style={{
-                  background: "radial-gradient(circle at 60% 50%, hsl(68 100% 56% / 0.15) 0%, transparent 50%)",
+                  background: "radial-gradient(circle at 50% 40%, hsl(var(--primary) / 0.2) 0%, transparent 40%)",
                 }}
+              />
+              
+              {/* Outer glow ring */}
+              <motion.div
+                className="absolute w-[80vw] max-w-[1000px] aspect-square rounded-full pointer-events-none"
+                style={{
+                  background: "radial-gradient(circle, transparent 40%, hsl(var(--primary) / 0.1) 50%, transparent 60%)",
+                }}
+                animate={{
+                  scale: [1, 1.15, 1],
+                  opacity: [0.3, 0.5, 0.3],
+                }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
               />
             </motion.div>
           </motion.div>
@@ -90,7 +125,7 @@ const Home = () => {
             >
               <motion.span 
                 className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-card/60 border border-border/50 rounded-full text-muted-foreground backdrop-blur-sm"
-                whileHover={{ scale: 1.05, borderColor: "hsl(68 100% 56% / 0.5)" }}
+                whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary) / 0.5)" }}
               >
                 <motion.span 
                   className="w-2 h-2 rounded-full bg-primary"
@@ -205,8 +240,8 @@ const Home = () => {
                   whileHover={{ 
                     y: -8, 
                     borderColor: "hsl(var(--primary))",
-                    boxShadow: "0 20px 40px -20px hsl(68 100% 56% / 0.3)"
-                  }} 
+                    boxShadow: "0 20px 40px -20px hsl(var(--primary) / 0.3)"
+                  }}
                   className="p-6 rounded-2xl bg-card/30 border border-border/30 text-center transition-all duration-300 group cursor-pointer magnetic-target"
                 >
                   <motion.div
@@ -258,7 +293,7 @@ const Home = () => {
             }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             style={{
-              background: "radial-gradient(ellipse at 50% 50%, hsl(68 100% 56% / 0.15) 0%, transparent 60%)",
+              background: "radial-gradient(ellipse at 50% 50%, hsl(var(--primary) / 0.15) 0%, transparent 60%)",
             }}
           />
           
@@ -311,9 +346,9 @@ const Home = () => {
                 className="absolute inset-0 opacity-20"
                 animate={{
                   background: [
-                    "radial-gradient(circle at 30% 50%, hsl(68 100% 56% / 0.4) 0%, transparent 50%)",
-                    "radial-gradient(circle at 70% 50%, hsl(68 100% 56% / 0.4) 0%, transparent 50%)",
-                    "radial-gradient(circle at 30% 50%, hsl(68 100% 56% / 0.4) 0%, transparent 50%)",
+                    "radial-gradient(circle at 30% 50%, hsl(var(--primary) / 0.4) 0%, transparent 50%)",
+                    "radial-gradient(circle at 70% 50%, hsl(var(--primary) / 0.4) 0%, transparent 50%)",
+                    "radial-gradient(circle at 30% 50%, hsl(var(--primary) / 0.4) 0%, transparent 50%)",
                   ]
                 }}
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
