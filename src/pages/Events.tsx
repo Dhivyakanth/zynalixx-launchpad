@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Calendar, MapPin, Users, Clock, ArrowRight } from "lucide-react";
 import PageTransition from "@/components/PageTransition";
-import SectionHeading from "@/components/SectionHeading";
+import TextReveal from "@/components/TextReveal";
+import MagneticButton from "@/components/MagneticButton";
 
 const events = [
   {
@@ -38,110 +39,213 @@ const Events = () => {
     <PageTransition>
       <main className="relative z-10 pt-24 pb-20 px-4">
         <div className="container mx-auto">
-          <SectionHeading
-            badge="Community"
-            title="Events"
-            subtitle="Join us at our events to learn, connect, and grow with the tech community"
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="mb-12 md:mb-16 text-center"
+          >
+            <motion.span
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 text-xs font-medium uppercase tracking-wider text-primary bg-primary/10 border border-primary/20 rounded-full"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              Community
+            </motion.span>
+            <h2 className="section-heading">
+              <TextReveal delay={0.2}>Events</TextReveal>
+            </h2>
+            <p className="section-subheading mt-4 mx-auto">
+              <TextReveal delay={0.4} staggerChildren={0.02}>
+                Join us at our events to learn, connect, and grow with the tech community
+              </TextReveal>
+            </p>
+          </motion.div>
 
           {/* Events Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
             {events.map((event, index) => (
               <motion.div
                 key={event.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
-                whileHover={{ y: -4, borderColor: "hsl(var(--primary) / 0.5)" }}
-                className="p-8 rounded-2xl bg-card/30 border border-border/30 transition-all duration-300 group"
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                whileHover={{ 
+                  y: -12, 
+                  boxShadow: "0 25px 50px -12px hsl(var(--primary) / 0.15)",
+                  borderColor: "hsl(var(--primary) / 0.5)",
+                }}
+                className="p-8 rounded-2xl bg-card/30 border border-border/30 transition-all duration-500 group relative overflow-hidden"
               >
-                {/* Badge */}
-                <div className="flex items-center justify-between mb-6">
-                  <span className="px-3 py-1 text-xs font-medium text-primary bg-primary/10 border border-primary/20 rounded-full">
-                    {event.type}
-                  </span>
-                </div>
+                {/* Animated gradient background */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-primary/5 to-transparent" />
 
-                {/* Content */}
-                <h3 className="text-xl font-display font-semibold mb-4 group-hover:text-primary transition-colors">
-                  {event.title}
-                </h3>
-
-                {/* Meta Info */}
-                <div className="flex flex-wrap gap-4 mb-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1.5">
-                    <Calendar size={14} className="text-primary" />
-                    {event.date}
+                <div className="relative z-10">
+                  {/* Badge */}
+                  <div className="flex items-center justify-between mb-6">
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="px-3 py-1 text-xs font-medium text-primary bg-primary/10 border border-primary/20 rounded-full"
+                    >
+                      {event.type}
+                    </motion.span>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <MapPin size={14} className="text-primary" />
-                    {event.location}
+
+                  {/* Content */}
+                  <h3 className="text-xl font-display font-semibold mb-4 group-hover:text-primary transition-colors relative inline-block">
+                    {event.title}
+                    <motion.span
+                      className="absolute bottom-0 left-0 h-0.5 bg-primary"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "100%" }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
+                    />
+                  </h3>
+
+                  {/* Meta Info */}
+                  <div className="flex flex-wrap gap-4 mb-4 text-sm text-muted-foreground">
+                    <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 }}
+                      className="flex items-center gap-1.5"
+                    >
+                      <Calendar size={14} className="text-primary" />
+                      {event.date}
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.15 }}
+                      className="flex items-center gap-1.5"
+                    >
+                      <MapPin size={14} className="text-primary" />
+                      {event.location}
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.2 }}
+                      className="flex items-center gap-1.5"
+                    >
+                      <Users size={14} className="text-primary" />
+                      {event.attendees} Attendees
+                    </motion.div>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <Users size={14} className="text-primary" />
-                    {event.attendees} Attendees
+
+                  <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+                    {event.description}
+                  </p>
+
+                  {/* Highlights */}
+                  <div className="space-y-2 mb-6">
+                    {event.highlights.map((highlight, hIndex) => (
+                      <motion.div
+                        key={highlight}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: hIndex * 0.05 }}
+                        className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors"
+                      >
+                        <motion.span
+                          className="w-1.5 h-1.5 rounded-full bg-primary"
+                          whileHover={{ scale: 1.5 }}
+                        />
+                        {highlight}
+                      </motion.div>
+                    ))}
                   </div>
+
+                  {/* CTA */}
+                  <motion.span
+                    whileHover={{ x: 8 }}
+                    className="inline-flex items-center gap-2 text-primary text-sm font-medium cursor-pointer magnetic-target"
+                  >
+                    View Details
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <ArrowRight size={14} />
+                    </motion.span>
+                  </motion.span>
                 </div>
-
-                <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
-                  {event.description}
-                </p>
-
-                {/* Highlights */}
-                <div className="space-y-2 mb-6">
-                  {event.highlights.map((highlight) => (
-                    <div key={highlight} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <span className="w-1 h-1 rounded-full bg-primary" />
-                      {highlight}
-                    </div>
-                  ))}
-                </div>
-
-                {/* CTA */}
-                <motion.button
-                  whileHover={{ x: 4 }}
-                  className="flex items-center gap-2 text-primary text-sm font-medium"
-                >
-                  View Details
-                  <ArrowRight size={14} />
-                </motion.button>
               </motion.div>
             ))}
           </div>
 
           {/* Upcoming Events Banner */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            className="text-center p-12 rounded-3xl bg-card/30 border border-border/30 relative overflow-hidden"
+            transition={{ duration: 0.8 }}
+            className="text-center p-12 rounded-3xl bg-card/30 border border-border/30 relative overflow-hidden group"
           >
-            <div 
-              className="absolute inset-0 opacity-20"
-              style={{
-                background: "radial-gradient(circle at 50% 50%, hsl(68 100% 56% / 0.3) 0%, transparent 70%)",
+            <motion.div 
+              className="absolute inset-0"
+              animate={{
+                background: [
+                  "radial-gradient(circle at 20% 50%, hsl(var(--primary) / 0.15) 0%, transparent 50%)",
+                  "radial-gradient(circle at 80% 50%, hsl(var(--primary) / 0.15) 0%, transparent 50%)",
+                  "radial-gradient(circle at 20% 50%, hsl(var(--primary) / 0.15) 0%, transparent 50%)",
+                ]
               }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             />
             <div className="relative z-10">
-              <div className="flex items-center justify-center gap-2 mb-4">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="flex items-center justify-center gap-2 mb-4"
+              >
                 <Clock className="w-5 h-5 text-primary" />
                 <span className="text-sm font-medium text-primary uppercase tracking-wider">Coming Soon</span>
-              </div>
-              <h2 className="text-2xl md:text-3xl font-display font-bold mb-4">
-                Stay Tuned for Upcoming Events
-              </h2>
-              <p className="text-muted-foreground max-w-xl mx-auto mb-6">
-                Follow us on social media to get notified about our upcoming workshops, hackathons, and meetups.
-              </p>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="btn-secondary inline-flex items-center gap-2"
+              </motion.div>
+              <motion.h2
+                className="text-2xl md:text-3xl font-display font-bold mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
               >
-                Follow Us
-                <ArrowRight size={16} />
-              </motion.button>
+                <TextReveal type="words">Stay Tuned for Upcoming Events</TextReveal>
+              </motion.h2>
+              <motion.p
+                className="text-muted-foreground max-w-xl mx-auto mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+              >
+                Follow us on social media to get notified about our upcoming workshops, hackathons, and meetups.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6 }}
+              >
+                <MagneticButton variant="secondary" strength={0.4}>
+                  Follow Us
+                  <ArrowRight size={16} />
+                </MagneticButton>
+              </motion.div>
             </div>
           </motion.div>
         </div>
