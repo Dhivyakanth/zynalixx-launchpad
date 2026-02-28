@@ -94,8 +94,8 @@ const Projects = () => {
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 whileHover={{ 
                   y: -12, 
-                  boxShadow: "0 25px 50px -12px hsl(var(--primary) / 0.15)",
-                  borderColor: "hsl(var(--primary) / 0.5)",
+                  boxShadow: "0 25px 50px -12px hsl(68 100% 56% / 0.15)",
+                  borderColor: "hsl(68 100% 56% / 0.5)",
                 }}
                 className="p-8 rounded-2xl bg-card/30 border border-border/30 transition-all duration-500 group relative overflow-hidden"
               >
@@ -112,8 +112,8 @@ const Projects = () => {
                     >
                       <project.icon className="w-7 h-7 text-primary" />
                     </motion.div>
-                    <div>
-                      <span className="text-xs font-medium text-primary uppercase tracking-wider">
+                    <div className="min-w-0">
+                      <span className="text-xs font-medium text-primary uppercase tracking-wider block">
                         {project.category}
                       </span>
                       <h3 className="text-2xl font-display font-semibold mt-1 group-hover:text-primary transition-colors relative inline-block">
