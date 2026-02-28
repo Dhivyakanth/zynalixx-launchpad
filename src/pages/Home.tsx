@@ -39,8 +39,8 @@ const Home = () => {
         <section ref={heroRef} className="min-h-screen flex flex-col items-center justify-center px-4 pt-20 relative overflow-hidden">
           {/* Seamless Orb Background with Parallax */}
           <motion.div
-            className="absolute inset-0 pointer-events-none"
-            style={{ y: planetY, scale: planetScale, opacity: planetOpacity }}
+            className="absolute inset-0 pointer-events-none will-change-transform"
+            style={{ y: planetY, scale: planetScale, opacity: planetOpacity, willChange: "transform, opacity" }}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
