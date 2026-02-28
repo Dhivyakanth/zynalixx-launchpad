@@ -25,12 +25,12 @@ const Home = () => {
     offset: ["start start", "end start"],
   });
 
-  // Parallax transforms
-  const planetY = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const planetScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
-  const planetOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.3]);
-  const heroContentY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const heroContentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  // Smooth parallax transforms with easing
+  const planetY = useTransform(scrollYProgress, [0, 1], [0, 120], { clamp: true });
+  const planetScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const planetOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.4]);
+  const heroContentY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const heroContentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
     <PageTransition>
@@ -39,8 +39,8 @@ const Home = () => {
         <section ref={heroRef} className="min-h-screen flex flex-col items-center justify-center px-4 pt-20 relative overflow-hidden">
           {/* Seamless Orb Background with Parallax */}
           <motion.div
-            className="absolute inset-0 pointer-events-none"
-            style={{ y: planetY, scale: planetScale, opacity: planetOpacity }}
+            className="absolute inset-0 pointer-events-none will-change-transform"
+            style={{ y: planetY, scale: planetScale, opacity: planetOpacity, willChange: "transform, opacity" }}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -128,8 +128,8 @@ const Home = () => {
 
           {/* Hero Content with Parallax */}
           <motion.div 
-            className="relative z-10 text-center max-w-5xl mx-auto"
-            style={{ y: heroContentY, opacity: heroContentOpacity }}
+            className="relative z-10 text-center max-w-5xl mx-auto will-change-transform"
+            style={{ y: heroContentY, opacity: heroContentOpacity, willChange: "transform, opacity" }}
           >
             {/* Announcement Badge */}
             <motion.div 
