@@ -128,8 +128,8 @@ const Home = () => {
 
           {/* Hero Content with Parallax */}
           <motion.div 
-            className="relative z-10 text-center max-w-5xl mx-auto"
-            style={{ y: heroContentY, opacity: heroContentOpacity }}
+            className="relative z-10 text-center max-w-5xl mx-auto will-change-transform"
+            style={{ y: heroContentY, opacity: heroContentOpacity, willChange: "transform, opacity" }}
           >
             {/* Announcement Badge */}
             <motion.div 
