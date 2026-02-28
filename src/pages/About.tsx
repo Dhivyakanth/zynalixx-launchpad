@@ -153,8 +153,12 @@ const About = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                  className="card-glass text-center group"
+                  whileHover={{ 
+                    y: -12, 
+                    boxShadow: "0 25px 50px -12px hsl(68 100% 56% / 0.15)",
+                    borderColor: "hsl(68 100% 56% / 0.5)",
+                  }}
+                  className="card-glass text-center group border border-border/30"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
                     <item.icon className="w-7 h-7 text-primary" />
