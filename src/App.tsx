@@ -27,6 +27,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <div className="relative min-h-screen cursor-none lg:cursor-none">
+          <ScrollToTop />
           <CursorFollower />
           <GradientBlobs />
           <Navbar />

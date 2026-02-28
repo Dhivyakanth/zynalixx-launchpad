@@ -197,8 +197,12 @@ const About = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -8 }}
-                  className="card-glass text-center group"
+                  whileHover={{ 
+                    y: -8, 
+                    boxShadow: "0 25px 50px -12px hsl(68 100% 56% / 0.15)",
+                    borderColor: "hsl(68 100% 56% / 0.5)",
+                  }}
+                  className="card-glass text-center group border border-border/30"
                 >
                   {/* Avatar */}
                   <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${member.color} flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform`}>

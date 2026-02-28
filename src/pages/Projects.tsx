@@ -112,8 +112,8 @@ const Projects = () => {
                     >
                       <project.icon className="w-7 h-7 text-primary" />
                     </motion.div>
-                    <div>
-                      <span className="text-xs font-medium text-primary uppercase tracking-wider">
+                    <div className="min-w-0">
+                      <span className="text-xs font-medium text-primary uppercase tracking-wider block">
                         {project.category}
                       </span>
                       <h3 className="text-2xl font-display font-semibold mt-1 group-hover:text-primary transition-colors relative inline-block">
