@@ -25,12 +25,12 @@ const Home = () => {
     offset: ["start start", "end start"],
   });
 
-  // Parallax transforms
-  const planetY = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const planetScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
-  const planetOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.3]);
-  const heroContentY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const heroContentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  // Smooth parallax transforms with easing
+  const planetY = useTransform(scrollYProgress, [0, 1], [0, 120], { clamp: true });
+  const planetScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const planetOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.4]);
+  const heroContentY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const heroContentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
     <PageTransition>
