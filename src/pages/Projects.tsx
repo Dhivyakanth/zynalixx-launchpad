@@ -94,8 +94,8 @@ const Projects = () => {
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 whileHover={{ 
                   y: -12, 
-                  boxShadow: "0 25px 50px -12px hsl(var(--primary) / 0.15)",
-                  borderColor: "hsl(var(--primary) / 0.5)",
+                  boxShadow: "0 25px 50px -12px hsl(68 100% 56% / 0.15)",
+                  borderColor: "hsl(68 100% 56% / 0.5)",
                 }}
                 className="p-8 rounded-2xl bg-card/30 border border-border/30 transition-all duration-500 group relative overflow-hidden"
               >
