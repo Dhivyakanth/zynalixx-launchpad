@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 import GradientBlobs from "./components/GradientBlobs";
 import CursorFollower from "./components/CursorFollower";
 import Home from "./pages/Home";
